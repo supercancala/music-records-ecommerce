@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('Fname');
             $table->string('Lname');
-            $table->string('usename')->unique();
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('isAdmin')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->string('profile_picture_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
