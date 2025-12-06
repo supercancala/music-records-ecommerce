@@ -1,0 +1,39 @@
+.arrow-btn{
+    width: 45px;
+    height: 45px;
+    opacity: 0.8;
+}
+
+.scroll-container{
+    scroll-behavior: smooth;
+    white-space: nowrap;
+}
+
+.item-card{
+    min-width: 200px;
+    max-width: 200px;
+}
+
+.item-cover{
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.item-title{
+    font-size: 1rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.position-relative:hover button {
+  opacity: 1 !important;
+}
