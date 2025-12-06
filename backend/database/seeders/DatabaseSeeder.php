@@ -2,85 +2,66 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Genre;
 use App\Models\Artist;
 use App\Models\Item;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // 1. Create Admin (Safe)
+        User::firstOrCreate(
+            ['email' => 'admin@musicstore.com'],
+            [
+                'Fname' => 'Admin',
+                'Lname' => 'User',
+                'username' => 'admin',
+                'password' => Hash::make('password123'),
+                'is_admin' => true,
+            ]
+        );
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // 2. Define your Lists (Data Source)
+        $genreNames = ['Rock', 'Pop', 'Jazz', 'Hip Hop', 'Electronic', 'Classical', 'R&B', 'Reggae', 'Blues', 'Metal'];
+        
+        $artistNames = [
+            'The Beatles', 'Taylor Swift', 'Pink Floyd', 'Nirvana', 'Queen', 
+            'Metallica', 'Miles Davis', 'Almendra', 'Radiohead', 'Daft Punk'
+            // Add as many as you want here...
+        ];
 
-        User::create([
-            'Fname' => 'Admin',
-            'Lname' => 'User',
-            'username' => 'admin',
-            'email' => 'admin@musicstore.com',
-            'password' => Hash::make('password123'),
-            'is_admin' => true,
-        ]);
+        // 3. Create Genres (SAFE LOOP)
+        // We collect the IDs so we can use them later
+        $genres = collect($genreNames)->map(function ($name) {
+            return Genre::firstOrCreate(['name' => $name]);
+        });
 
-        // Create genres
-        $rock = Genre::create(['name' => 'Rock']);
-        $pop = Genre::create(['name' => 'Pop']);
-        $jazz = Genre::create(['name' => 'Jazz']);
-        $latin = Genre::create(['name' => 'Latin']);
-        $salsa = Genre::create(['name' => 'Salsa']);
-        $reggaeton = Genre::create(['name' => 'Reggaeton']);
-        $classical = Genre::create(['name' => 'Classical']);
-        $disco = Genre::create(['name' => 'Disco']);
-        $soul = Genre::create(['name' => 'Soul']);
-        $fusion = Genre::create(['name' => 'Fusion']);
-        $bolero = Genre::create(['name' => 'Bolero']);
+        // 4. Create Artists (SAFE LOOP)
+        $artists = collect($artistNames)->map(function ($name) {
+            // This uses your ArtistFactory logic (biography, etc.)
+            // BUT forces the name to be the one from your list.
+            return Artist::factory()->create([
+                'name' => $name
+            ]);
+        });
 
-        // Create Artists
-        $beatles = Artist::create([
-            'name' => 'The Beatles',
-            'biography' => 'The legendary band from Liverpool.'
-        ]);
+        // 5. Create Items and Link them Randomly
+        // Now we can safely use the factory for ITEMS, but link to EXISTING artists
+        Item::factory(50)->create()->each(function ($item) use ($genres, $artists) {
+            
+            // Pick one random Genre from our created list
+            $randomGenre = $genres->random();
+            $item->genres()->attach($randomGenre);
 
-        $taylor = Artist::create([
-            'name' => 'Taylor Swift',
-            'biography' => 'American singer-songwriter.'
-        ]);
+            // Pick one random Artist from our created list
+            $randomArtist = $artists->random();
+            $item->artists()->attach($randomArtist);
+        });
 
-        $abbeyRoad = Item::create([
-            'title' => 'Abbey Road',
-            'description' => 'The eleventh studio album by The Beatles.',
-            'price' => 29.99,
-            'stock_quantity' => 20,
-            'release_date' => '1965-09-26',
-            'country' => 'UK',
-        ]);
-
-        $abbeyRoad->genres()->attach($rock->id);
-        $abbeyRoad->artists()->attach($beatles->id);
-
-        $midnights = Item::create([
-            'title' => 'Midnights',
-            'description' => 'A concept album about nocturnal ruminations, it contains confessional songs that explore regret, self-criticism, fantasies, heartbreak, and infatuation. ',
-            'price' => 34.99,
-            'release_date' => '2022-10-21',
-            'stock_quantity' => 50,
-            'country' => 'USA'
-        ]);
-
-        $midnights->genres()->attach($pop->id);
-        $midnights->artists()->attach($taylor->id);
-
-        echo('Database populated successfully.');
+        echo "Database seeded successfully with UNIQUE artists and genres! 🎸\n";
     }
 }
