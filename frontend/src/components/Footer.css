@@ -1,0 +1,9 @@
+/* Push the footer to the bottom */
+footer {
+  margin-top: auto;
+}
+
+/* Optional: Hover effect for footer links */
+.hover-white:hover {
+  color: #fff !important;
+}

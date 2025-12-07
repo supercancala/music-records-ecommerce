@@ -37,3 +37,7 @@
 .position-relative:hover button {
   opacity: 1 !important;
 }
+
+.view-all-link{
+    color: #0d6efd
+}
