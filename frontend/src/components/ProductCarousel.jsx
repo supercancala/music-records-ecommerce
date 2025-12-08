@@ -23,8 +23,6 @@ const ProductCarousel = ({ products, title, viewAllLink }) => {
     if (!products || products.length === 0) {
         return <div className='text-center p-5'>No products to display.</div>;
     }
-    
-    const displayProducts = products.slice(0,15);
 
     return (
         <div className='mb-5'>

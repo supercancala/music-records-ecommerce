@@ -42,12 +42,28 @@ const HomePage = () => {
 
             {/* Carousel I */}
             <Container className='my-5'>
-                <h2 className='mb-4'>Database Test</h2>
-                {loading && <div className='text-center p-5'>Loading your vinyls...</div>}
-                {error && <div className='text-center text-danger p-5'>{error}</div>}
+                {!loading && (
+                    <ProductCarousel 
+                        title="New Releases" 
+                        products={products.slice(0, 10)} 
+                        viewAllLink="/shop?sort=newest"
+                    />
+                )}
 
-                {!loading && !error && (
-                    <ProductCarousel products={products}/>
+
+                {!loading && (
+                    <ProductCarousel 
+                        title="Best Sellers" 
+                        products={products.slice(10, 20)} 
+                        viewAllLink="/shop?sort=bestsellers"
+                    />
+                )}
+
+                <ProductCarousel 
+                        title="Jazz Classics" 
+                        products={products.filter(p => p.genres && p.genres.some(g => g.name === 'Jazz')).slice(0, 10)} 
+                        viewAllLink="/shop?category=Rock"
+                    />
                 )}
             </Container>
         </>

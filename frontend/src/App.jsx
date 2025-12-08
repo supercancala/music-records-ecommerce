@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import Test from './pages/Test';
 import TopNavbar from './components/TopNavbar';
 import Footer from './components/Footer';
+import ShopPage from './pages/ShopPage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,7 +30,9 @@ function App() {
       {/* Fallback for unknown routes */}
       <Route path="*" element={<div className="container mt-5">Page Not Found</div>} />
       <Route path="/test" element={<Test item={mockItem}/>} />
+      <Route path="/shop" element={<ShopPage products/>}/>
       <Route path="/product/:id" element={<div className="container mt-5"><h1>Product Details Coming Soon...</h1></div>} />
+
     </Routes>
     <Footer></Footer>
    </BrowserRouter>

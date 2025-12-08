@@ -1,9 +1,26 @@
-import React from "react";
-import { Navbar, Container, Nav, Form, FormControl, Button, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Navbar, Container, Nav, Form, FormControl, Button, Badge, InputGroup } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import './TopNavbar.css';
 
 const TopNavbar = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchType, setSearchType] = useState('records');
+
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        if (!searchQuery.trim()) return; // Don't search for empty strings
+
+        if (searchType === 'artits') {
+            navigate(`/artists?search=${encodeURIComponent(searchQuery)}`);
+        } else {
+            navigate(`/shop?search=${encodeURIComponent(searchQuery)}`);
+        }
+    };
+
     return (
         <div className="top-navbar sticky-top">
         <Navbar bg='dark' variant='dark' expand='lg' className='py-3'>
@@ -16,16 +33,34 @@ const TopNavbar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     
                     {/* 2. Search Bar (Centered) */}
-                    <Form className="d-flex mx-auto" style={{ width: '50%', maxWidth: '600px' }}>
-                    <FormControl
-                        type="search"
-                        placeholder="Search for artists, albums..."
-                        className="me-2"
-                        aria-label="Search"
-                    />
-                    <Button variant="outline-light">Search</Button>
-                    </Form>
+                    <Form className="d-flex mx-auto" style={{ width: '60%', maxWidth: '700px' }} onSubmit={handleSearch}>
+                        <InputGroup>
+                            {/* A. The Dropdown (Left side) */}
+                            <Form.Select 
+                            style={{ maxWidth: '120px', backgroundColor: '#f8f9fa' }}
+                            value={searchType}
+                            onChange={(e) => setSearchType(e.target.value)}
+                            aria-label="Search Type"
+                            >
+                            <option value="records">Records</option>
+                            <option value="artists">Artists</option>
+                            </Form.Select>
 
+                            {/* B. The Text Input */}
+                            <FormControl
+                            type="search"
+                            placeholder={searchType === 'artists' ? "Search for a band..." : "Search for albums..."}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            aria-label="Search"
+                            />
+
+                            {/* C. The Button */}
+                            <Button variant="primary" type="submit">
+                            <i className="bi bi-search"></i>
+                            </Button>
+                        </InputGroup>
+                    </Form>
                     {/* 3. Right Side Icons */}
                     <Nav className="ms-auto align-items-center">
                     <Nav.Link as={Link} to="/cart" className="text-white me-3 position-relative">

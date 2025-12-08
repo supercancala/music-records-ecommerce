@@ -1,0 +1,12 @@
+.item-art-container{
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+.item-cover{
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
