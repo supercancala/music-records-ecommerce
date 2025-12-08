@@ -17,8 +17,6 @@
   min-height: 100vh;
 }
 
-
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -80,4 +78,8 @@ button:focus-visible {
 
 .text-white {
   color: white;
+}
+
+.hover-white:hover {
+  color: #fff !important;
 }

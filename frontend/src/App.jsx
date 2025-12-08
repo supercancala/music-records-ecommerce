@@ -3,11 +3,11 @@ import { Navbar, Container, Nav, Form, FormControl, Button, Badge } from 'react-
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 // import ShopPage from './pages/ShopPage';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import Test from './pages/Test';
 import TopNavbar from './components/TopNavbar';
 import Footer from './components/Footer';
-import ShopPage from './pages/ShopPage';
+import ShopPage from './pages/ShopPage/ShopPage';
 
 function App() {
   const [count, setCount] = useState(0)

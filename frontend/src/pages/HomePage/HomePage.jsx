@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { Container, Button, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import ProductCarousel from '../components/ProductCarousel';
+import ProductCarousel from '../../components/ProductCarousel/ProductCarousel';
 import axios from 'axios';
 import './HomePage.css';
 

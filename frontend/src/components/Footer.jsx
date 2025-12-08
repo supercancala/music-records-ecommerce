@@ -1,11 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Footer.css';
 
 const Footer = () =>{
     return (
-        <footer className="bg-dark text-white pt-5 pb-3 mt-auto">
+        <footer className="bg-dark text-white pt-5 pb-3 mt-auto" style={{marginTop: 'auto'}}> 
             <Container>
                 <Row>
                     <Col md={6} className="mb-4">

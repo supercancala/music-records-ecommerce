@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Navbar, Container, Nav, Form, FormControl, Button, Badge, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import './TopNavbar.css';
+
 
 const TopNavbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +22,7 @@ const TopNavbar = () => {
     };
 
     return (
-        <div className="top-navbar sticky-top">
+        <div className="sticky-top" style={{zIndex:1020}}>
         <Navbar bg='dark' variant='dark' expand='lg' className='py-3'>
             <Container fluid>
             <Navbar.Brand as={Link} to="/" className="fw-bold fs-3">

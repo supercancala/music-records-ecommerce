@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form, Spinner} from 'react-bootstrap';
 import { useSearchParams, Link } from "react-router-dom";
+import './ShopPage.css'
 import axios from "axios";
 
 const ShopPage = () => {
