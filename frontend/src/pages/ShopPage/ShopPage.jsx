@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Button, Form, Spinner} from 'react-bootstrap
 import { useSearchParams, Link } from "react-router-dom";
 import './ShopPage.css'
 import axios from "axios";
+import { useCart } from "../../context/CartContext";
 
 const ShopPage = () => {
     const [products, setProducts] = useState([]);
@@ -12,6 +13,8 @@ const ShopPage = () => {
     const currentSearch = searchParams.get('search') || '';
     const currentCategory = searchParams.get('category') || '';
     const currentSort = searchParams.get('sort') || 'newest';
+
+    const { addToCart } = useCart();
 
     // Fetching logic
     useEffect(() => {
@@ -102,7 +105,12 @@ const ShopPage = () => {
 
                                         <div className="mt-auto d-flex justify-content-between align-items-center">
                                             <span className="fw-bold fs-5">${Number(item.price).toFixed(2)}</span>
-                                            <Button variant="outline-dark" size="sm" className="rounded-circle">
+                                            <Button variant="outline-dark" size="sm" className="rounded-circle"
+                                            onClick={() => {
+                                                addToCart(product);
+                                                alert(`${product.title} added to cart!`);
+                                            }}
+                                            >
                                                 <i className="bi bi-cart-plus"></i>
                                             </Button>
                                         </div>

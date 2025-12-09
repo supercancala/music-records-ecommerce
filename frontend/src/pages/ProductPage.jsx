@@ -2,12 +2,16 @@ import React, {useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Badge, Spinner, Image } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import { useCart } from '../context/CartContext';
 
 const ProductPage = () => {
     const { id } = useParams();
     const [ product, setProduct ] = useState(null);
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState(null);
+
+    const { addToCart } = useCart();
+
     
     useEffect(() => {
         const fetchProduct = async () => {
@@ -90,7 +94,10 @@ const ProductPage = () => {
                             size='lg'
                             className='py-3 fw-bold text-uppercase'
                             disabled={product.stock_quantity <= 0}
-                            onClick={() => alert(`Added ${product.title} to Cart!`)}
+                            onClick={() => {
+                                addToCart(product);
+                                alert(`${product.title} added to cart!`);
+                            }}
                         >
                             <i className='bi bi-cart-plus me-2'></i>
                             {product.stock_quantity > 0 ? 'Add to Cart' : 'Sold Out!'}

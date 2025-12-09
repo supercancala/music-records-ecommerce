@@ -13,8 +13,6 @@ import ProductPage from './pages/ProductPage';
 function App() {
   const [count, setCount] = useState(0)
 
-
-
   return (
    
    <BrowserRouter>
@@ -27,7 +25,6 @@ function App() {
       <Route path="/test" element={<Test />} />
       <Route path="/shop" element={<ShopPage products/>}/>
       <Route path="/product/:id" element={<div className="container mt-5"><ProductPage></ProductPage></div>} />
-
     </Routes>
     <Footer></Footer>
    </BrowserRouter>

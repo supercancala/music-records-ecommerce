@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import { Navbar, Container, Nav, Form, FormControl, Button, Badge, InputGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 
 const TopNavbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('records');
+    const { cartCount } = useCart();
 
     const navigate = useNavigate();
 
@@ -65,8 +67,16 @@ const TopNavbar = () => {
                     <Nav className="ms-auto align-items-center">
                     <Nav.Link as={Link} to="/cart" className="text-white me-3 position-relative">
                         <i className="bi bi-cart2"></i> Cart 
-                        {/* Cart Badge Placeholder */}
-                        <Badge bg="danger" className="ms-1">0</Badge>
+                        {/* Only show badge if we have items */}
+                        {cartCount > 0 && (
+                        <Badge 
+                            bg="danger" 
+                            className="ms-1" 
+                            style={{ fontSize: '0.75rem' }} 
+                        >
+                            {cartCount > 99 ? '99+' : cartCount}
+                        </Badge>
+                        )}
                     </Nav.Link>
                     
                     <Nav.Link as={Link} to="/login" className="text-white">
