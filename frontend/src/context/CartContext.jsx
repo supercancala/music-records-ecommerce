@@ -5,7 +5,8 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('vinyl_cart');
-        return savedCart ? JSON.parse(savedCart) : [];
+        // SAFEGUARD 1: Filter out nulls/undefined immediately on load
+        return savedCart ? JSON.parse(savedCart).filter(item => item && item.id) : [];
     });
 
     useEffect(() => {
@@ -19,11 +20,11 @@ export const CartProvider = ({ children }) => {
             const existingItem = prevCart.find((item) => item.id === product.id);
 
             if (existingItem) {
-                return prevCart.map((item) => {
+                return prevCart.map((item) => 
                     item.id === product.id 
                     ? {... item, quantity: item.quantity + 1 } 
                     : item
-                })
+                )
             } else {
                 return [...prevCart, {...product, quantity: 1}]
             }
@@ -35,12 +36,12 @@ export const CartProvider = ({ children }) => {
     }
 
     const updateQuantity = (productId, newQuantity) => {
-        if (newQuantity < 1) return;
-        setCart((prevCart) => {
-            prevCart.map((item) => {
-                item.id === productId ? {... item, quantity: newQuantity } : item
-            })
-        });
+        if (newQuantity < 1) return;        
+        setCart((prevCart) => 
+            prevCart.map((item) => 
+                item.id === productId ? { ...item, quantity: newQuantity } : item
+            )
+        );
     };
 
     const clearCart = () => setCart([]);

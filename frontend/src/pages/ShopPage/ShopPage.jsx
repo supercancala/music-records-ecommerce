@@ -107,8 +107,8 @@ const ShopPage = () => {
                                             <span className="fw-bold fs-5">${Number(item.price).toFixed(2)}</span>
                                             <Button variant="outline-dark" size="sm" className="rounded-circle"
                                             onClick={() => {
-                                                addToCart(product);
-                                                alert(`${product.title} added to cart!`);
+                                                addToCart(item);
+                                                alert(`${item.title} added to cart!`);
                                             }}
                                             >
                                                 <i className="bi bi-cart-plus"></i>
