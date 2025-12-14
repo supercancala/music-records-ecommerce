@@ -10,6 +10,11 @@ import Footer from './components/Footer';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
+import CheckoutPage from './pages/CheckoutPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,10 +32,15 @@ function App() {
       <Route path="/shop" element={<ShopPage products/>}/>
       <Route path="/product/:id" element={<div className="container mt-5"><ProductPage></ProductPage></div>} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage/>} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/admin" element={<AdminDashboard />} />
     </Routes>
     <Footer></Footer>
    </BrowserRouter>
   )
 }
 
-export default App
+export default App;

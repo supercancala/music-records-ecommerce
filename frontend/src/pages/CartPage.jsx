@@ -124,7 +124,7 @@ const CartPage = () => {
                                 <Button
                                     variant="dark"
                                     size="lg"
-                                    onClick={ () => alert('Checkout flow coming soon!')}
+                                    onClick={ () => navigate('/checkout')}
                                 >
                                     Proceed to Checkout
                                 </Button>

@@ -11,6 +11,14 @@ class ShippingAddress extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'address',
+        'city',
+        'postal_code',
+        'country',
+    ];
+    
     public function orders() :HasMany{
         return $this->hasMany(Order::class);
     }

@@ -28,8 +28,8 @@ const Footer = () =>{
                                 </a>
                             </li>
                             <li className="mb-2">
-                                <Link to="/login" className="text-white-50 text-decoration-none hover-white">
-                                    <i className="bi bi-shield-lock me-2"></i>Admin Login
+                                <Link to="/admin" className="text-white-50 text-decoration-none hover-white">
+                                    <i className="bi bi-shield-lock me-2"></i>Admin Dashboard
                                 </Link>
                             </li>
                         </ul>

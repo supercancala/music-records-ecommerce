@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model
 {
+    protected $fillable = [
+        'title',
+        'description',
+        'price',
+        'stock_quantity',
+        'release_date',
+        'cover_art_url',
+        'country', // 👈 Add this line!
+    ];
+    
     use HasFactory;
 
     public function genres(){

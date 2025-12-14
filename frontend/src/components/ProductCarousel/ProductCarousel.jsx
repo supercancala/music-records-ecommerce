@@ -60,7 +60,7 @@ const ProductCarousel = ({ products, title, viewAllLink }) => {
                         <Link to={`/product/${item.id}`}>
                         <Card.Img
                             variant='top'
-                            src={item.cover_image_url || 'https://vectorified.com/images/disc-icon-3.png'}
+                            src={item.cover_art_url || 'https://vectorified.com/images/disc-icon-3.png'}
                             className='item-cover rounded shadow-sm'
                         >
                         </Card.Img>

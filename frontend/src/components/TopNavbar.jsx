@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import { Navbar, Container, Nav, Form, FormControl, Button, Badge, InputGroup } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, FormControl, Button, Badge, InputGroup, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
 import { useCart } from "../context/CartContext";
 
 
@@ -8,6 +9,8 @@ const TopNavbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('records');
     const { cartCount } = useCart();
+
+    const { user, logout } = useAuth();
 
     const navigate = useNavigate();
 
@@ -78,10 +81,29 @@ const TopNavbar = () => {
                         </Badge>
                         )}
                     </Nav.Link>
-                    
-                    <Nav.Link as={Link} to="/login" className="text-white">
-                        <i className="bi bi-person-circle"></i> Profile
-                    </Nav.Link>
+                    { user ? (
+                        <NavDropdown
+                            title={
+                                <span className="text-white">
+                                    <i className="bi bi-person-circle me-2"></i>
+                                    Hi, {user.Fname}
+                                </span>
+                            }
+                            id="user-dropdown"
+                            align="end"
+                        >
+                            <NavDropdown.Item as={Link} to="/profile">My Profile</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/profile">My Orders</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={logout} className="text-danger">
+                                Logout
+                            </NavDropdown.Item>
+                        </NavDropdown>
+                    ) : (
+                        <Nav.Link as={Link} to="/login" className="text-white">
+                            <i className="bi bi-person"></i> Login
+                        </Nav.Link>
+                    )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

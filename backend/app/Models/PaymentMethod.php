@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PaymentMethod extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'card_brand',
+        'last_4_digits',
+    ];
+    
     use HasFactory;
 
     public function orders() :HasMany{
